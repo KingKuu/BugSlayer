@@ -26,5 +26,4 @@ func _input(event: InputEvent) -> void:
 		# ROTATION LIMITS
 		rotation.x = clamp(rotation.x, -pitchLimit, pitchLimit)
 		# ROTATION LIMITS
-		print(rotation)
 	# CAMERA ROTATION CALCULATIONS

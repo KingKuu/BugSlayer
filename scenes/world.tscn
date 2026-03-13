@@ -2,22 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://nx8g2vk0squv" path="res://entities/player.tscn" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://depjbor645at7" path="res://entities/camera.tscn" id="2_4wyf3"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_gv5m4"]
-size = Vector3(10, 1, 10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_f3sb7"]
-size = Vector3(10, 1, 10)
+[ext_resource type="PackedScene" uid="uid://fkjo1hp0dehq" path="res://scenes/level.tscn" id="3_4wyf3"]
 
 [node name="world" type="Node3D" unique_id=101087726]
-
-[node name="Floor" type="StaticBody3D" parent="." unique_id=1109647062]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1335437014]
-mesh = SubResource("BoxMesh_gv5m4")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1663068431]
-shape = SubResource("BoxShape3D_f3sb7")
 
 [node name="player" parent="." unique_id=1737972437 node_paths=PackedStringArray("camera") instance=ExtResource("1_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -30,3 +17,5 @@ offset = Vector3(1, 1.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=449309118]
 transform = Transform3D(0.75, -0.649519, 0.125, 0.4330127, 0.625, 0.649519, -0.5, -0.4330127, 0.75, 0, 0, 0)
+
+[node name="Level" parent="." unique_id=807407472 instance=ExtResource("3_4wyf3")]

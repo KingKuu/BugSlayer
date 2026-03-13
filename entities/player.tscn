@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cklxh5s3lnv2s" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://l31e5rog3n33" path="res://models/mannequin.glb" id="2_onrkg"]
+[ext_resource type="AudioStream" uid="uid://cjjxb6ngqimri" path="res://sfx/434757__notarget__wood-step-sample-2.wav" id="3_e4p34"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
 
@@ -13,3 +14,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_4flbx")
 
 [node name="Mesh" parent="." unique_id=1645111276 instance=ExtResource("2_onrkg")]
+
+[node name="StepAudio" type="AudioStreamPlayer3D" parent="." unique_id=2138465357]
+stream = ExtResource("3_e4p34")
