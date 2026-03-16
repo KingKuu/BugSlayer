@@ -4,6 +4,7 @@ extends CharacterBody3D
 
 var inputDirection:Vector2
 var moveDirection:Vector3
+var dashDirection:Vector3
 
 func _physics_process(delta: float) -> void:
 	
@@ -22,6 +23,12 @@ func _physics_process(delta: float) -> void:
 	moveDirection = (transform.basis * Vector3(inputDirection.x, 0, inputDirection.y)).normalized()
 	# MAKE PLAYER MOVE FORWARD BASED ON ROTATION
 	
+	# DASH TIMER
+	if Input.is_action_just_pressed("dash") and $DashCooldown.time_left == 0:
+		$DashTimer.start()
+		$DashCooldown.start()
+	# DASH TIMER
+	
 	# FORGIVENESS TIMERS
 	if is_on_floor():
 		$CoyoteTimer.start()
@@ -29,11 +36,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		$JumpBufferTimer.start()
 	# FORGIVENESS TIMERS
-	
-	# SLIDE
-	if Input.is_action_just_pressed("crouch") and moveDirection.length() != 0:
-		$SlideTimer.start()
-	# SLIDE
 	
 	# GRAVITY CALCULATIONS
 	if not is_on_floor():
@@ -56,7 +58,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 10.0
 		$JumpBufferTimer.stop()
 		$CoyoteTimer.stop()
-		$SlideTimer.stop()
 	# JUMP CALCULATIONS
 	
 	# FOOTSTEPS
@@ -66,19 +67,16 @@ func _physics_process(delta: float) -> void:
 	# FOOTSTEPS
 	
 	# FINAL VELOCITY CALCULATIONS
-	if is_on_floor():
-		if $SlideTimer.time_left > 0:
-			velocity.x = lerp(velocity.x, moveDirection.x * 18.0, 0.1)
-			velocity.z = lerp(velocity.z, moveDirection.z * 18.0, 0.1)
-		elif Input.is_action_pressed("crouch"):
-			velocity.x = lerp(velocity.x, moveDirection.x * 4.0, 0.2)
-			velocity.z = lerp(velocity.z, moveDirection.z * 4.0, 0.2)
-		else:
+	if $DashTimer.time_left > 0:
+		velocity.x = lerp(velocity.x, moveDirection.x * 30.0, 0.5)
+		velocity.z = lerp(velocity.z, moveDirection.z * 30.0, 0.5)
+	else:
+		if is_on_floor():
 			velocity.x = lerp(velocity.x, moveDirection.x * 10.0, 0.2)
 			velocity.z = lerp(velocity.z, moveDirection.z * 10.0, 0.2)
-	else:
-		velocity.x = lerp(velocity.x, moveDirection.x * 10.0, 0.02)
-		velocity.z = lerp(velocity.z, moveDirection.z * 10.0, 0.02)
+		else:
+			velocity.x = lerp(velocity.x, moveDirection.x * 10.0, 0.02)
+			velocity.z = lerp(velocity.z, moveDirection.z * 10.0, 0.02)
 	# FINAL VELOCITY CALCULATIONS
 	
 	move_and_slide()
