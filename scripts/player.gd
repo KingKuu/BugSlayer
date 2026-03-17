@@ -29,6 +29,15 @@ func _physics_process(delta: float) -> void:
 		$DashCooldown.start()
 	# DASH TIMER
 	
+	# PUNCH LOGIC
+	if Input.is_action_just_pressed("punch") and not $PunchTimer.time_left > 0:
+		$PunchHitbox.monitoring = true
+		$PunchTimer.start()
+	
+	if $PunchTimer.time_left < 1:
+		$PunchHitbox.monitoring = false
+	# PUNCH LOGIC
+	
 	# FORGIVENESS TIMERS
 	if is_on_floor():
 		$CoyoteTimer.start()
@@ -80,3 +89,7 @@ func _physics_process(delta: float) -> void:
 	# FINAL VELOCITY CALCULATIONS
 	
 	move_and_slide()
+
+func _on_punch_hitbox_body_entered(body: Node3D) -> void:
+	if body.is_in_group("enemy"):
+		body.queue_free()

@@ -1,10 +1,15 @@
 [gd_scene format=3 uid="uid://ce3rj0n0rp5ux"]
 
+[ext_resource type="Script" uid="uid://dwagrqug147yb" path="res://scripts/enemy.gd" id="1_p7g5j"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_c8u6y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c8u6y"]
 
-[node name="Enemy" type="CharacterBody3D" unique_id=397631498]
+[node name="Enemy" type="CharacterBody3D" unique_id=397631498 groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_p7g5j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=573374258]
 mesh = SubResource("BoxMesh_c8u6y")

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://nx8g2vk0squv" path="res://entities/player.tscn" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://depjbor645at7" path="res://entities/camera.tscn" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://fkjo1hp0dehq" path="res://scenes/level.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://ce3rj0n0rp5ux" path="res://entities/enemy.tscn" id="4_k0juu"]
 
 [node name="world" type="Node3D" unique_id=101087726]
 
@@ -19,3 +20,6 @@ offset = Vector3(1, 1.5, 0)
 transform = Transform3D(0.75, -0.649519, 0.125, 0.4330127, 0.625, 0.649519, -0.5, -0.4330127, 0.75, 0, 0, 0)
 
 [node name="Level" parent="." unique_id=807407472 instance=ExtResource("3_4wyf3")]
+
+[node name="Enemy" parent="." unique_id=397631498 instance=ExtResource("4_k0juu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.478435, 8.660094, 0)

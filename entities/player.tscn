@@ -4,10 +4,34 @@
 [ext_resource type="PackedScene" uid="uid://l31e5rog3n33" path="res://models/mannequin.glb" id="2_onrkg"]
 [ext_resource type="AudioStream" uid="uid://cjjxb6ngqimri" path="res://sfx/434757__notarget__wood-step-sample-2.wav" id="3_e4p34"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e4p34"]
+radius = 0.4
+height = 2.05
 
-[node name="player" type="CharacterBody3D" unique_id=1737972437]
+[sub_resource type="BoxShape3D" id="BoxShape3D_e4p34"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+radius = 0.23535156
+
+[node name="player" type="CharacterBody3D" unique_id=1737972437 groups=["player"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_4flbx")
+
+[node name="KillBox" type="Area3D" parent="." unique_id=1065982503]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox" unique_id=990367584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 0)
+shape = SubResource("CapsuleShape3D_e4p34")
+
+[node name="PunchHitbox" type="Area3D" parent="." unique_id=996657030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.0169601)
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PunchHitbox" unique_id=1127930798]
+shape = SubResource("BoxShape3D_e4p34")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=4232282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -36,3 +60,9 @@ one_shot = true
 process_callback = 0
 wait_time = 1.25
 one_shot = true
+
+[node name="PunchTimer" type="Timer" parent="." unique_id=270830703]
+process_callback = 0
+one_shot = true
+
+[connection signal="body_entered" from="PunchHitbox" to="." method="_on_punch_hitbox_body_entered"]
