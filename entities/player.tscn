@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://nx8g2vk0squv"]
 
 [ext_resource type="Script" uid="uid://cklxh5s3lnv2s" path="res://scripts/player.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://l31e5rog3n33" path="res://models/mannequin.glb" id="2_onrkg"]
 [ext_resource type="AudioStream" uid="uid://cjjxb6ngqimri" path="res://sfx/434757__notarget__wood-step-sample-2.wav" id="3_e4p34"]
+[ext_resource type="PackedScene" uid="uid://d3a46r7sw5pko" path="res://models/BugSlayer.glb" id="3_rfe5m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e4p34"]
 radius = 0.4
@@ -14,6 +14,7 @@ height = 2.05
 radius = 0.23535156
 
 [node name="player" type="CharacterBody3D" unique_id=1737972437 groups=["player"]]
+process_mode = 3
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_4flbx")
@@ -36,8 +37,6 @@ shape = SubResource("BoxShape3D_e4p34")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=4232282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_4flbx")
-
-[node name="Mesh" parent="." unique_id=1645111276 instance=ExtResource("2_onrkg")]
 
 [node name="StepAudio" type="AudioStreamPlayer3D" parent="." unique_id=2138465357]
 stream = ExtResource("3_e4p34")
@@ -65,4 +64,48 @@ one_shot = true
 process_callback = 0
 one_shot = true
 
+[node name="GameOver" type="Control" parent="." unique_id=1533059992]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextContainer" type="VBoxContainer" parent="GameOver" unique_id=338544222]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="GameOver/TextContainer" unique_id=1207682083]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GameOver/TextContainer" unique_id=2011997918]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Reload"
+
+[node name="BugSlayer" parent="." unique_id=688863471 instance=ExtResource("3_rfe5m")]
+
+[node name="Skeleton3D" parent="BugSlayer/Player" parent_id_path=PackedInt32Array(688863471, 1587355994) index="0" unique_id=1548719289]
+bones/2/rotation = Quaternion(0.011431319, -5.140254e-08, 1.762885e-07, 0.9999347)
+bones/4/rotation = Quaternion(0.022171175, 1.6683505e-07, 2.1805852e-07, 0.99975425)
+bones/6/rotation = Quaternion(-0.019769097, -1.0366953e-18, 1.9354595e-17, 0.9998046)
+bones/7/rotation = Quaternion(0.023860583, -6.1809893e-18, 2.845059e-17, 0.9997154)
+bones/9/rotation = Quaternion(-0.108865544, 0.40835586, 0.875722, 0.23346296)
+bones/11/rotation = Quaternion(-0.017338939, 0.002818365, -0.95785147, 0.2867266)
+
+[connection signal="body_entered" from="KillBox" to="." method="_on_kill_box_body_entered"]
 [connection signal="body_entered" from="PunchHitbox" to="." method="_on_punch_hitbox_body_entered"]
+[connection signal="pressed" from="GameOver/TextContainer/Button" to="." method="_on_button_pressed"]
+
+[editable path="BugSlayer"]

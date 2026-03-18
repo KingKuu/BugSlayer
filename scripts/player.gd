@@ -77,9 +77,11 @@ func _physics_process(delta: float) -> void:
 	
 	# FINAL VELOCITY CALCULATIONS
 	if $DashTimer.time_left > 0:
+		$BugSlayer/AnimationPlayer.play("Dash")
 		velocity.x = lerp(velocity.x, moveDirection.x * 30.0, 0.5)
 		velocity.z = lerp(velocity.z, moveDirection.z * 30.0, 0.5)
 	else:
+		$BugSlayer/AnimationPlayer.play("Idle")
 		if is_on_floor():
 			velocity.x = lerp(velocity.x, moveDirection.x * 10.0, 0.2)
 			velocity.z = lerp(velocity.z, moveDirection.z * 10.0, 0.2)
@@ -93,3 +95,13 @@ func _physics_process(delta: float) -> void:
 func _on_punch_hitbox_body_entered(body: Node3D) -> void:
 	if body.is_in_group("enemy"):
 		body.queue_free()
+
+func _on_kill_box_body_entered(body: Node3D) -> void:
+	if body.is_in_group("enemy"):
+		get_tree().paused = true
+		$GameOver.visible = true
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _on_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()

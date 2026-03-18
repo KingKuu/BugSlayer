@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://l31e5rog3n33"
-path="res://.godot/imported/mannequin.glb-fba3ed6270ffcdc0b39cd34a008194a8.scn"
+uid="uid://d3a46r7sw5pko"
+path="res://.godot/imported/BugSlayer.glb-fb5041e9aa34312b102b535b2112ca91.scn"
 
 [deps]
 
-source_file="res://models/mannequin.glb"
-dest_files=["res://.godot/imported/mannequin.glb-fba3ed6270ffcdc0b39cd34a008194a8.scn"]
+source_file="res://models/BugSlayer.glb"
+dest_files=["res://.godot/imported/BugSlayer.glb-fb5041e9aa34312b102b535b2112ca91.scn"]
 
 [params]
 

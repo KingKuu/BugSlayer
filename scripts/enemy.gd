@@ -10,8 +10,8 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	if target != Vector3.ZERO:
-		velocity.x = lerp(velocity.x, (target.x - global_position.x) * 2, 0.01)
-		velocity.z = lerp(velocity.z, (target.z - global_position.z) * 2, 0.01)
+		velocity.x = lerp(velocity.x, (target.x - global_position.x) * 1, 0.05)
+		velocity.z = lerp(velocity.z, (target.z - global_position.z) * 1, 0.05)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, 0.5)
 		velocity.z = lerp(velocity.z, 0.0, 0.5)
